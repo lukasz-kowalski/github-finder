@@ -1,3 +1,7 @@
+## Github Finder
+
+Github Finder let you find and display informations about users. Created with React Hooks and TypeScript.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
