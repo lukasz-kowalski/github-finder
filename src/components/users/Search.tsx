@@ -16,10 +16,10 @@ const Search: React.FC<IProps> = ({
 }) => {
   const [text, setText] = useState("");
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+  const handleChange = (e: ChangeEvent<HTMLInputElement>): void =>
     setText(e.target.value);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent): void => {
     e.preventDefault();
     if (text === "") {
       return setAlert("Please enter something", "light");
