@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IUser } from "../../types/interfaces";
+import GithubContext from "../../context/github/GithubContext";
 import UserItem from "./UserItem";
 import Spinner from "../layout/Spinner";
 
@@ -9,19 +10,17 @@ const userStyle = {
   gridGap: "1rem"
 };
 
-interface IProps {
-  users: IUser[];
-  loading: boolean;
-}
+const Users: React.FC = () => {
+  const githubContext = useContext(GithubContext);
+  const { loading, users } = githubContext;
 
-const Users: React.FC<IProps> = ({ users, loading }) => {
   if (loading) {
     return <Spinner />;
   }
 
   return (
     <div style={userStyle}>
-      {users.map(user => (
+      {users.map((user: IUser) => (
         <UserItem key={user.id} user={user} />
       ))}
     </div>

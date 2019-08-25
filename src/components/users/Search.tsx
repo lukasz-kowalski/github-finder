@@ -1,20 +1,14 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { ClearUsers, ShowAlert, SearchUsers } from "../../types/types";
+import React, { useState, ChangeEvent, FormEvent, useContext } from "react";
+import GithubContext from "../../context/github/GithubContext";
+import AlertContext from "../../context/alert/AlertContext";
 
-interface IProps {
-  showClear: boolean;
-  setAlert: ShowAlert;
-  clearUsers: ClearUsers;
-  searchUsers: SearchUsers;
-}
-
-const Search: React.FC<IProps> = ({
-  showClear,
-  clearUsers,
-  searchUsers,
-  setAlert
-}) => {
+const Search: React.FC = () => {
+  const githubContext = useContext(GithubContext);
+  const alertContext = useContext(AlertContext);
   const [text, setText] = useState("");
+
+  const { searchUsers, clearUsers, users } = githubContext;
+  const { setAlert } = alertContext;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>): void =>
     setText(e.target.value);
@@ -43,7 +37,7 @@ const Search: React.FC<IProps> = ({
           Search
         </button>
       </form>
-      {showClear && (
+      {users.length > 0 && (
         <button className="btn btn-light btn-block" onClick={clearUsers}>
           Clear
         </button>

@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import { Link, RouteComponentProps } from "react-router-dom";
-import { IUser, IRepo } from "../../types/interfaces";
-import { GetUser, GetUserRepos } from "../../types/types";
+import GithubContext from "../../context/github/GithubContext";
+import { IRepo } from "../../types/interfaces";
+import { GetUserRepos } from "../../types/types";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 
@@ -10,21 +11,15 @@ interface MatchParams {
 }
 
 interface IProps extends RouteComponentProps<MatchParams> {
-  user: IUser;
-  loading: boolean;
-  getUser: GetUser;
   getUserRepos: GetUserRepos;
   repos: IRepo[];
 }
 
-const User: React.FC<IProps> = ({
-  user,
-  loading,
-  repos,
-  getUser,
-  getUserRepos,
-  match
-}) => {
+const User: React.FC<IProps> = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+
+  const { getUser, getUserRepos, loading, user, repos } = githubContext;
+
   const {
     name,
     avatar_url,

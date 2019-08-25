@@ -1,11 +1,9 @@
-import React from "react";
-import { IAlert } from "../../types/interfaces";
+import React, { useContext } from "react";
+import AlertContext from "../../context/alert/AlertContext";
 
-interface IProps {
-  alert: IAlert;
-}
-
-const Alert: React.FC<IProps> = ({ alert }) => {
+const Alert: React.FC = () => {
+  const alertContext = useContext(AlertContext);
+  const { alert } = alertContext;
   return (
     <>
       {alert !== null && (
